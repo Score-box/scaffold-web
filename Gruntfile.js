@@ -112,7 +112,8 @@ module.exports = function (grunt) {
           src: [
             '.tmp',
             '<%= config.dist %>/*',
-            '!<%= config.dist %>/.git*'
+            '!<%= config.dist %>/.git*',
+            '!<%= config.dist %>/CNAME'
           ]
         }]
       },
