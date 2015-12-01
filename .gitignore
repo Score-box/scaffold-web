@@ -1,6 +1,5 @@
-node_modules/
-bower_components/
-*.log
-
-build/
-dist/
+node_modules
+dist
+app
+.tmp
+bower_components
