@@ -382,6 +382,16 @@ module.exports = function (grunt) {
         files: {
           '.tmp/scripts/app.js': ['<%= config.app %>/scripts/react/app.jsx']
         }
+      },
+      alive: {
+        files: {
+          '.tmp/scripts/app.js': ['<%= config.app %>/scripts/react/app.jsx']
+        },
+        options: {
+          watch: true,
+          cache: true,
+          keepAlive: true
+        }
       }
     },
 
