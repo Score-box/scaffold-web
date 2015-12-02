@@ -407,6 +407,19 @@ module.exports = function (grunt) {
         }
       }
     },
+    'string-replace': {
+      dist: {
+        options: {
+          replacements: [{
+            pattern: '/*@@RINJECTION@@*/',
+            replacement: '<%= grunt.revInjector %>'
+          }]
+        },
+        files: {
+          '<%= config.dist %>/':'<%= config.dist %>/index.html'
+        }
+      }
+    },
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [
@@ -479,6 +492,7 @@ module.exports = function (grunt) {
     'filerev_assets',
     'revInjector:dist',
     'usemin',
+    'string-replace:dist',
     'htmlmin'
   ]);
 
