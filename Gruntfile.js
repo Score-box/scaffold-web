@@ -373,9 +373,22 @@ module.exports = function (grunt) {
       }
     },
 
+    // Compile jsx with browserify
+    browserify: {
+      options: {
+        transform: [['babelify', {presets: ["es2015", "react"]}]]
+      },
+      dist: {
+        files: {
+          '.tmp/scripts/app.js': ['<%= config.app %>/scripts/react/app.jsx']
+        }
+      }
+    },
+
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [
+        'browserify:dist',
         'babel:dist',
         'sass'
       ],
@@ -383,6 +396,7 @@ module.exports = function (grunt) {
         'babel'
       ],
       dist: [
+        'browserify:dist',
         'babel',
         'sass',
         'imagemin',
