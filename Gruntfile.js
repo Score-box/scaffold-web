@@ -477,6 +477,7 @@ module.exports = function (grunt) {
     'modernizr',
     'filerev',
     'filerev_assets',
+    'revInjector:dist',
     'usemin',
     'htmlmin'
   ]);
@@ -486,4 +487,17 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('revInjector', function (target) {
+
+    if (target == 'dist') {
+      var obj = JSON.parse(require('fs').readFileSync('dist/assets.json'));
+      var code = '';
+      for (var key in obj) {
+        code += ['rev[\'', key, '\']=\'', obj[key], '\';'].join('');
+      }
+      grunt.revInjector = code;
+      console.log(grunt.revInjector);
+    }
+  });
 };
