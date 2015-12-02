@@ -398,7 +398,15 @@ module.exports = function (grunt) {
         }
       }
     },
-
+    filerev_assets: {
+      dist: {
+        options: {
+          dest: '<%= config.dist %>/assets.json',
+          cwd: '<%= config.dist %>',
+          prefix: ''
+        }
+      }
+    },
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [
@@ -468,6 +476,7 @@ module.exports = function (grunt) {
     'copy:dist',
     'modernizr',
     'filerev',
+    'filerev_assets',
     'usemin',
     'htmlmin'
   ]);
