@@ -4,7 +4,9 @@
 
 ```git clone https://github.com/score-box/scaffold-web```  
 ```cd scaffold-web```  
-```git clone https://github.com/score-box/showcase-app app```
+```git clone https://github.com/score-box/showcase-app app```  
+```npm install```
+```bower install```
 
 # development usage :
 
