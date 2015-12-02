@@ -324,6 +324,13 @@ module.exports = function (grunt) {
     // concat: {
     //   dist: {}
     // },
+    uglify: {
+      jsx: {
+        files: {
+          '<%= config.dist %>/scripts/app.js': ['.tmp/scripts/app.js']
+        }
+      }
+    },
 
     // Copies remaining files to places other tasks can use
     copy: {
