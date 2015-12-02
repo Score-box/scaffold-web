@@ -219,6 +219,10 @@ module.exports = function (grunt) {
 
     // Renames files for browser caching purposes
     filerev: {
+      options: {
+        algorithm: 'md5',
+        length: 8
+      },
       dist: {
         src: [
           '<%= config.dist %>/scripts/{,*/}*.js',
