@@ -420,6 +420,15 @@ module.exports = function (grunt) {
         }
       }
     },
+    //serve 'as is' without script injection and sync
+    connect: {
+      server: {
+        options: {
+          base: '<%= config.dist %>',
+          keepalive: true
+        }
+      }
+    },
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [
@@ -444,7 +453,7 @@ module.exports = function (grunt) {
   grunt.registerTask('serve', 'start the server and preview your app', function (target) {
 
     if (target === 'dist') {
-      return grunt.task.run(['build', 'browserSync:dist']);
+      return grunt.task.run(['build', 'connect']);
     }
 
     grunt.task.run([
