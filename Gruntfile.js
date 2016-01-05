@@ -413,6 +413,9 @@ module.exports = function (grunt) {
           replacements: [{
             pattern: '/*@@RINJECTION@@*/',
             replacement: '<%= grunt.revInjector %>'
+          },{
+            pattern: '<!--@@HTMLINJECTION@@-->',
+            replacement: '<%= grunt.staticHTML %>'
           }]
         },
         files: {
@@ -501,6 +504,7 @@ module.exports = function (grunt) {
     'filerev_assets',
     'revInjector:dist',
     'usemin',
+    'reactStaticInjection',
     'string-replace:dist',
     'htmlmin'
   ]);
@@ -520,7 +524,24 @@ module.exports = function (grunt) {
         code += ['rev[\'', key, '\']=\'', obj[key], '\';'].join('');
       }
       grunt.revInjector = code;
-      console.log(grunt.revInjector);
     }
+  });
+
+  // once the rev are minified and stored
+  grunt.registerTask('reactStaticInjection', function () {
+    require("babel-register")({
+      presets : ['es2015', 'react']
+    });
+    var ReactDOMServer = require('react-dom/server');
+    GLOBAL.React = require('react');
+    var rev = require('./dist/assets.json');
+    GLOBAL.R = function (target) {
+      if (rev[target])
+        return rev[target];
+      else
+        return target;
+    };
+    var App = require('./app/scripts/react/components/app.jsx');
+    grunt.staticHTML = ReactDOMServer.renderToString(React.createElement(App, null));
   });
 };
